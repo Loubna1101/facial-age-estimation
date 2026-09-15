@@ -6,13 +6,11 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from PIL import Image
 from pydantic import BaseModel
  
-IMG_SIZE = 224  # must match the size the model was trained on
+IMG_SIZE = 224 
 MODEL_PATH = "app/best_model.keras"
  
 app = FastAPI(title="Age Estimator API")
  
-# Load the model once, at startup — not on every request, since that would
-# be slow and wasteful (re-loading weights from disk each time).
 model = tf.keras.models.load_model(MODEL_PATH)
  
  
